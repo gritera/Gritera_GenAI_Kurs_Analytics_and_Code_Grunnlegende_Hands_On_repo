@@ -13,11 +13,17 @@ pip install --quiet \
 
 # ---- Claude Code CLI ----
 echo "Installerer Claude Code..."
-npm install -g @anthropic-ai/claude-code@latest 2>/dev/null || {
+npm install -g @anthropic-ai/claude-code@latest || {
   echo "MERK: Claude Code npm-installasjon feilet."
-  echo "      Du kan installere manuelt: npm install -g @anthropic-ai/claude-code"
-  echo "      Eller følg instruksjonene på https://docs.anthropic.com/en/docs/claude-code"
+  echo "      Installer manuelt: npm install -g @anthropic-ai/claude-code"
 }
+
+# Sørg for at npm global bin er i PATH
+NPM_BIN="$(npm prefix -g)/bin"
+if [[ ":$PATH:" != *":$NPM_BIN:"* ]]; then
+  echo "export PATH=\"\$PATH:$NPM_BIN\"" >> ~/.bashrc
+  export PATH="$PATH:$NPM_BIN"
+fi
 
 # ---- dbt prosjekt ----
 echo "Kjører dbt seed + run..."
@@ -27,7 +33,6 @@ dbt run --quiet
 echo ""
 echo "=== Miljøet er klart! ==="
 echo ""
-echo "Neste steg:"
 echo "  dbt debug          # verifiser at alt fungerer"
 echo "  claude             # start Claude Code (krever ANTHROPIC_API_KEY)"
 echo ""
