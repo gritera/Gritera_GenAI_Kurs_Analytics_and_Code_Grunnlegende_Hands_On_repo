@@ -1,0 +1,19 @@
+name: 'kurs_dataplattform'
+version: '1.0.0'
+
+profile: 'kurs_dataplattform'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  kurs_dataplattform:
+    +schema: raw

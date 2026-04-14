@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Rå seed-data lastet fra CSV-filer."
+    tables:
+      - name: raw_customers
+        description: "Kundedata — registreringsinformasjon."
+      - name: raw_products
+        description: "Produktkatalog med priser og leverandører."
+      - name: raw_orders
+        description: "Ordredata med status og totalbeløp."
+      - name: raw_order_items
+        description: "Ordrelinjer — individuelle produkter per ordre."
+      - name: raw_complaints
+        description: "Kundeklager knyttet til ordrer."

@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Staging-modell for kunder. Renser og standardiserer data fra raw_customers."
+    columns:
+      - name: customer_id
+        description: "Unik identifikator for kunden."
+        tests:
+          - unique
+          - not_null
+      - name: full_name
+        description: "Fullt navn (fornavn + etternavn)."
+      - name: email
+        description: "Kundens e-postadresse."
+        tests:
+          - unique
+      - name: region
+        description: "Kundens region (by)."
+      - name: created_at
+        description: "Dato kunden ble registrert."
+        tests:
+          - not_null
+      - name: is_active
+        description: "Om kunden er aktiv (true/false)."

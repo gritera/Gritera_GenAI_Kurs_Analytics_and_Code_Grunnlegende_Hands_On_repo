@@ -1,0 +1,13 @@
+product_id,product_name,category,price_nok,cost_nok,supplier,is_available,created_at
+101,Fjordkaffe Mørk,Kaffe,89.90,32.00,NordicRoast AS,true,2023-01-01
+102,Fjordkaffe Lys,Kaffe,89.90,32.00,NordicRoast AS,true,2023-01-01
+103,Bergente Grønn,Te,59.90,18.50,TeNord AS,true,2023-02-15
+104,Bergente Earl Grey,Te,64.90,20.00,TeNord AS,true,2023-02-15
+105,NordicBar Sjokolade,Snacks,34.90,12.00,SweetNorth AS,true,2023-03-01
+106,NordicBar Nøtter,Snacks,39.90,14.50,SweetNorth AS,true,2023-03-01
+107,Fjordkaffe Espresso,Kaffe,99.90,38.00,NordicRoast AS,true,2023-06-01
+108,Bergente Kamille,Te,54.90,16.00,TeNord AS,false,2023-06-01
+109,NordicBar Bær,Snacks,37.90,13.00,SweetNorth AS,true,2023-09-01
+110,Fjordkaffe Decaf,Kaffe,94.90,35.00,NordicRoast AS,true,2024-01-15
+111,Bergente Matcha,Te,79.90,28.00,TeNord AS,true,2024-01-15
+112,NordicBar Protein,Snacks,49.90,22.00,SweetNorth AS,true,2024-03-01

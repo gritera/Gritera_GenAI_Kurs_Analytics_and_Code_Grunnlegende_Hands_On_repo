@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Staging-modell for ordrer. Renser og standardiserer data fra raw_orders."
+    columns:
+      - name: order_id
+        description: "Unik identifikator for ordren."
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Referanse til kunden som la inn ordren."
+        tests:
+          - not_null
+      - name: order_date
+        description: "Dato ordren ble lagt inn."
+        tests:
+          - not_null
+      - name: status
+        description: "Ordrestatus: completed, returned, pending."
+        tests:
+          - accepted_values:
+              values: ['completed', 'returned', 'pending']
+      - name: total_amount_nok
+        description: "Total ordresum i NOK."

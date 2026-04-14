@@ -1,0 +1,12 @@
+complaint_id,customer_id,order_id,category,description,status,created_at,resolved_at
+C001,2,1002,Leveranse,Pakken kom 3 dager for sent,resolved,2023-03-22,2023-03-25
+C002,5,1004,Kvalitet,NordicBar Nøtter var stale,resolved,2023-04-15,2023-04-18
+C003,1,1005,Leveranse,Feil produkt levert,resolved,2023-05-08,2023-05-12
+C004,7,1007,Kvalitet,Kaffen smakte brent,resolved,2023-08-05,2023-08-07
+C005,8,1008,Faktura,Ble fakturert dobbelt,resolved,2023-08-20,2023-08-22
+C006,2,1009,Leveranse,Pakken var skadet ved ankomst,resolved,2023-09-15,2023-09-20
+C007,11,1011,Kvalitet,Sjokoladebar smeltet i transport,resolved,2023-11-25,2023-11-28
+C008,1,1013,Leveranse,Pakken ble levert til feil adresse,resolved,2024-01-20,2024-01-25
+C009,13,1016,Faktura,Mangler kvittering for betaling,open,2024-03-05,
+C010,8,1018,Kvalitet,Kaffen var gammel — retur ønskes,resolved,2024-03-22,2024-03-25
+C011,15,1019,Leveranse,Har ikke mottatt pakken ennå,open,2024-05-02,

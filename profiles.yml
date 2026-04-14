@@ -1,0 +1,7 @@
+kurs_dataplattform:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: 'kurs.duckdb'
+      threads: 4
