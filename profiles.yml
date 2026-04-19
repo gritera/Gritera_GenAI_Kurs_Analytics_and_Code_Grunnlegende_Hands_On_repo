@@ -5,3 +5,5 @@ kurs_dataplattform:
       type: duckdb
       path: 'kurs.duckdb'
       threads: 4
+      pre_run: 
+        - "ATTACH 'md:_share/hacker_news/de11a0e3-9d68-48d2-ac44-40e07a1d496b' AS sample_data"

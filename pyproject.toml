@@ -12,13 +12,3 @@ dependencies = [
     "pandas",
     "sqlfluff",
 ]
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-# --- ADD THIS SECTION ---
-[tool.uv]
-managed = true
-package = false
-# -------------------------
