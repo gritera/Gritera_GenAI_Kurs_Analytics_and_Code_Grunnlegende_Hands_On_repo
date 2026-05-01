@@ -126,6 +126,8 @@ Fiktiv norsk e-handel (NordicRetail) med kaffe, te og snacks.
 | `raw_order_items` | 42 | Ordrelinjer — produkter per ordre |
 | `raw_complaints` | 11 | Kundeklager knyttet til ordrer |
 
+> Repoet inneholder også et Northwind-datasett under `seeds/northwind/`. Det er **deaktivert som standard** — for å laste dem, sett `+enabled: true` i `dbt_project.yml` under `seeds.kurs_dataplattform.northwind`.
+
 ### Ferdige modeller (mønsterreferanse)
 
 ```

@@ -17,3 +17,7 @@ clean-targets:
 seeds:
   kurs_dataplattform:
     +schema: raw
+    northwind:
+      # Northwind-datasettet er ikke en del av kursøvelsene, men ligger
+      # tilgjengelig for senere bruk. Sett +enabled: true for å laste dem.
+      +enabled: false
