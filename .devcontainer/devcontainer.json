@@ -5,9 +5,7 @@
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "version": "20"
-    },
-    // Adds uv to the container automatically
-    "ghcr.io/astral-sh/uv:0": {}
+    }
   },
 
   "customizations": {
