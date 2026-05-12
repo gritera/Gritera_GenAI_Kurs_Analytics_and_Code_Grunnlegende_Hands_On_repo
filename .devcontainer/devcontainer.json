@@ -11,7 +11,8 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        // Point VS Code to the virtual environment uv creates
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
         "editor.formatOnSave": true,
         "terminal.integrated.defaultProfile.linux": "bash"
       },
@@ -27,8 +28,6 @@
   },
 
   "postCreateCommand": "bash .devcontainer/setup.sh",
-
-  "forwardPorts": [],
 
   "remoteEnv": {
     "DBT_PROFILES_DIR": "${containerWorkspaceFolder}"
