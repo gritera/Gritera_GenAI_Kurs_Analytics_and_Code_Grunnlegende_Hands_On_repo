@@ -1,0 +1,14 @@
+[project]
+name = "gritera-genai-kurs"
+version = "0.1.0"
+description = "Gritera GenAI Kurs — dbt, DuckDB, and pandas environment"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "dbt-core",
+    "dbt-duckdb",
+    "duckcli>=0.2.1",
+    "duckdb>=1.5.2",
+    "pandas",
+    "sqlfluff",
+]

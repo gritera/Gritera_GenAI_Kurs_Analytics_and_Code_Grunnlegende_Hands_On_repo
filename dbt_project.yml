@@ -17,3 +17,116 @@ clean-targets:
 seeds:
   kurs_dataplattform:
     +schema: raw
+    northwind:
+      # Northwind-datasettet er ikke en del av kursøvelsene, men ligger
+      # tilgjengelig for senere bruk. Sett +enabled: true for å laste dem.
+      # Alle kolonner lastes som VARCHAR for å unngå type-konflikter
+      # ("NULL"-strenger, blandet timestamp/dato, BLOB-felter osv.).
+      # Cast i staging-modeller når dataene faktisk skal brukes.
+      +enabled: false
+      categories:
+        +column_types:
+          categoryID: varchar
+          categoryName: varchar
+          description: varchar
+          picture: varchar
+      customers:
+        +column_types:
+          customerID: varchar
+          companyName: varchar
+          contactName: varchar
+          contactTitle: varchar
+          address: varchar
+          city: varchar
+          region: varchar
+          postalCode: varchar
+          country: varchar
+          phone: varchar
+          fax: varchar
+      employee_territories:
+        +column_types:
+          employeeID: varchar
+          territoryID: varchar
+      employees:
+        +column_types:
+          employeeID: varchar
+          lastName: varchar
+          firstName: varchar
+          title: varchar
+          titleOfCourtesy: varchar
+          birthDate: varchar
+          hireDate: varchar
+          address: varchar
+          city: varchar
+          region: varchar
+          postalCode: varchar
+          country: varchar
+          homePhone: varchar
+          extension: varchar
+          photo: varchar
+          notes: varchar
+          reportsTo: varchar
+          photoPath: varchar
+      order_details:
+        +column_types:
+          orderID: varchar
+          productID: varchar
+          unitPrice: varchar
+          quantity: varchar
+          discount: varchar
+      orders:
+        +column_types:
+          orderID: varchar
+          customerID: varchar
+          employeeID: varchar
+          orderDate: varchar
+          requiredDate: varchar
+          shippedDate: varchar
+          shipVia: varchar
+          freight: varchar
+          shipName: varchar
+          shipAddress: varchar
+          shipCity: varchar
+          shipRegion: varchar
+          shipPostalCode: varchar
+          shipCountry: varchar
+      products:
+        +column_types:
+          productID: varchar
+          productName: varchar
+          supplierID: varchar
+          categoryID: varchar
+          quantityPerUnit: varchar
+          unitPrice: varchar
+          unitsInStock: varchar
+          unitsOnOrder: varchar
+          reorderLevel: varchar
+          discontinued: varchar
+      regions:
+        +column_types:
+          regionID: varchar
+          regionDescription: varchar
+      shippers:
+        +column_types:
+          shipperID: varchar
+          companyName: varchar
+          phone: varchar
+      suppliers:
+        +column_types:
+          supplierID: varchar
+          companyName: varchar
+          contactName: varchar
+          contactTitle: varchar
+          address: varchar
+          city: varchar
+          region: varchar
+          postalCode: varchar
+          country: varchar
+          phone: varchar
+          fax: varchar
+          homePage: varchar
+      territories:
+        +column_types:
+          territoryID: varchar
+          territoryDescription: varchar
+          regionID: varchar
