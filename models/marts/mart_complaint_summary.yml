@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: mart_complaint_summary
+    description: "Månedlig oppsummering av kundeklager per kategori."
+    columns:
+      - name: maaned
+        description: "Første dag i måneden klagen ble opprettet."
+        tests:
+          - not_null
+      - name: klagekategori
+        description: "Kategori for klagen (Leveranse, Kvalitet, Faktura)."
+        tests:
+          - not_null
+      - name: antall_klager
+        description: "Totalt antall klager i perioden."
+      - name: antall_loste
+        description: "Antall klager med status 'resolved'."
+      - name: snitt_behandlingstid_dager
+        description: "Gjennomsnittlig antall dager fra opprettelse til løsning, kun for løste klager."
+      - name: prosent_lost
+        description: "Andel løste klager i prosent."

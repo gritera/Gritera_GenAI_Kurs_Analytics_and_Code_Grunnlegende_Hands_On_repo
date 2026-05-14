@@ -1,0 +1,4 @@
+name: kurs
+type: duckdb
+options:
+  filename: ../../../kurs.duckdb
