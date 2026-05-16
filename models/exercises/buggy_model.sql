@@ -8,7 +8,7 @@
 --         Den siste feilen gir IKKE compile-error. Den gir feil data.
 
 with orders as (
-    select * from {{ ref('raw_order') }}
+    select * from {{ ref('raw_orders') }}
     where status = 'completed'
 ),
 
@@ -22,11 +22,10 @@ products as (
 
 select
     p.category,
-    p.product_name,
     count(distinct o.order_id) as num_orders,
-    sum(oi.line_total) as total_revenue_nok
+    sum(oi.line_total_nok) as total_revenue_nok
 from orders o
 inner join order_items oi on o.order_id = oi.order_id
 inner join products p on oi.product_id = p.product_id
-group by p.category, p.product_name
+group by p.category
 order by p.category
