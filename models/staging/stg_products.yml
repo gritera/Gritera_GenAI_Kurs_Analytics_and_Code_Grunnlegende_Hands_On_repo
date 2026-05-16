@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: stg_products
+    description: "Staging-modell for produkter. Renser og standardiserer data fra raw_products."
+    columns:
+      - name: product_id
+        description: "Unik identifikator for produktet."
+        tests:
+          - unique
+          - not_null
+      - name: product_name
+        description: "Produktets navn."
+        tests:
+          - not_null
+      - name: category
+        description: "Produktkategori."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Kaffe', 'Te', 'Snacks']
+      - name: price_nok
+        description: "Utsalgspris i NOK."
+        tests:
+          - not_null
+      - name: cost_nok
+        description: "Innkjøpspris i NOK."
+        tests:
+          - not_null
+      - name: supplier
+        description: "Navn på leverandør."
+        tests:
+          - not_null
+      - name: is_available
+        description: "Om produktet er tilgjengelig for salg."
+        tests:
+          - not_null
+      - name: created_at
+        description: "Dato produktet ble lagt inn i systemet."
+        tests:
+          - not_null
