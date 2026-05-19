@@ -86,7 +86,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 
 # 2. Klon ditt repo og gå inn i mappen
-git clone https://github.com/<ditt-brukernavn>/<repo-navn>.git
+git clone https://github.com/gritera/Gritera_GenAI_Kurs_Analytics_and_Code_Grunnlegende_Hands_On_repo.git
 cd <repo-navn>
 
 # 3. Installer alle avhengigheter
