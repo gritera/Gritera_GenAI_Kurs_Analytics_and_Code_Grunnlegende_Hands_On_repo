@@ -1,0 +1,5 @@
+expression RepoPath = "C:\\Users\\ToreLundell-Nygjelte\\OneDrive - Gritera\\Gritera_AI\\HandsOnAnalyticsCourse\\Gritera_GenAI_Kurs_Analytics_and_Code_Grunnlegende_Hands_On_repo\\powerbi\\data" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 8fb3dbd6-ce37-40c7-8bec-257e5e5bbc91
+
+	annotation PBI_ResultType = Text
+

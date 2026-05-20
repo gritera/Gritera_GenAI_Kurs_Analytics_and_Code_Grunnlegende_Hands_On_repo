@@ -1,0 +1,13 @@
+product_sk,product_id,product_name,category,supplier,list_price_nok,standard_cost_nok,list_margin_nok,list_margin_pct,price_tier,is_available,availability_status,product_launch_date,launch_year
+38b3eff8baf56627478ec76a704e9b52,101,Fjordkaffe Mørk,Kaffe,NordicRoast AS,89.9,32.0,57.900000000000006,0.6440489432703004,Premium,true,Tilgjengelig,2023-01-01,2023
+ec8956637a99787bd197eacd77acce5e,102,Fjordkaffe Lys,Kaffe,NordicRoast AS,89.9,32.0,57.900000000000006,0.6440489432703004,Premium,true,Tilgjengelig,2023-01-01,2023
+6974ce5ac660610b44d9b9fed0ff9548,103,Bergente Grønn,Te,TeNord AS,59.9,18.5,41.4,0.6911519198664441,Middels,true,Tilgjengelig,2023-02-15,2023
+c9e1074f5b3f9fc8ea15d152add07294,104,Bergente Earl Grey,Te,TeNord AS,64.9,20.0,44.900000000000006,0.691833590138675,Middels,true,Tilgjengelig,2023-02-15,2023
+65b9eea6e1cc6bb9f0cd2a47751a186f,105,NordicBar Sjokolade,Snacks,SweetNorth AS,34.9,12.0,22.9,0.6561604584527221,Lav,true,Tilgjengelig,2023-03-01,2023
+f0935e4cd5920aa6c7c996a5ee53a70f,106,NordicBar Nøtter,Snacks,SweetNorth AS,39.9,14.5,25.4,0.6365914786967418,Lav,true,Tilgjengelig,2023-03-01,2023
+a97da629b098b75c294dffdc3e463904,107,Fjordkaffe Espresso,Kaffe,NordicRoast AS,99.9,38.0,61.900000000000006,0.6196196196196196,Premium,true,Tilgjengelig,2023-06-01,2023
+a3c65c2974270fd093ee8a9bf8ae7d0b,108,Bergente Kamille,Te,TeNord AS,54.9,16.0,38.9,0.7085610200364298,Middels,false,Utgått,2023-06-01,2023
+2723d092b63885e0d7c260cc007e8b9d,109,NordicBar Bær,Snacks,SweetNorth AS,37.9,13.0,24.9,0.6569920844327176,Lav,true,Tilgjengelig,2023-09-01,2023
+5f93f983524def3dca464469d2cf9f3e,110,Fjordkaffe Decaf,Kaffe,NordicRoast AS,94.9,35.0,59.900000000000006,0.6311907270811381,Premium,true,Tilgjengelig,2024-01-15,2024
+698d51a19d8a121ce581499d7b701668,111,Bergente Matcha,Te,TeNord AS,79.9,28.0,51.900000000000006,0.6495619524405507,Middels,true,Tilgjengelig,2024-01-15,2024
+7f6ffaa6bb0b408017b62254211691b5,112,NordicBar Protein,Snacks,SweetNorth AS,49.9,22.0,27.9,0.5591182364729459,Lav,true,Tilgjengelig,2024-03-01,2024

@@ -1,0 +1,137 @@
+table dim_product
+	lineageTag: 9d36df5a-a25d-4b77-b15d-d81b41ea194c
+
+	column product_sk
+		dataType: string
+		isHidden
+		lineageTag: 9930ae18-91c3-41fa-b34a-865db4a548bb
+		summarizeBy: none
+		sourceColumn: product_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d5fb5b7-8a0f-42be-b96f-295d2fed6d61
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: 2fe9a084-0afb-48f4-bb05-22a46bba4c15
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 1e18984a-a2bf-466d-b05f-ef39fa2f5012
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier
+		dataType: string
+		lineageTag: 67d9747d-f770-4422-80fe-e7150a382f77
+		summarizeBy: none
+		sourceColumn: supplier
+
+		annotation SummarizationSetBy = Automatic
+
+	column list_price_nok
+		dataType: double
+		formatString: #,##0.00 "kr"
+		lineageTag: 8be5267d-7020-41e4-8acb-644165bb079a
+		summarizeBy: sum
+		sourceColumn: list_price_nok
+
+		annotation SummarizationSetBy = Automatic
+
+	column standard_cost_nok
+		dataType: double
+		formatString: #,##0.00 "kr"
+		lineageTag: 29607311-2c93-4189-91ee-0f667484fcf7
+		summarizeBy: sum
+		sourceColumn: standard_cost_nok
+
+		annotation SummarizationSetBy = Automatic
+
+	column list_margin_nok
+		dataType: double
+		formatString: #,##0.00 "kr"
+		lineageTag: 77cb1a11-ee97-4a92-981f-40c32a776a3a
+		summarizeBy: sum
+		sourceColumn: list_margin_nok
+
+		annotation SummarizationSetBy = Automatic
+
+	column list_margin_pct
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 1de1c02e-06da-4b96-9e8e-5cd7c1f0d781
+		summarizeBy: average
+		sourceColumn: list_margin_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column price_tier
+		dataType: string
+		lineageTag: f9a040c1-c86a-4b67-a1ce-d68df183f8df
+		summarizeBy: none
+		sourceColumn: price_tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_available
+		dataType: boolean
+		lineageTag: afdb4464-4f6c-4f35-9ba0-433343f6edb5
+		summarizeBy: none
+		sourceColumn: is_available
+
+		annotation SummarizationSetBy = Automatic
+
+	column availability_status
+		dataType: string
+		lineageTag: 0d165597-cb97-44a9-973c-61f0b40716a7
+		summarizeBy: none
+		sourceColumn: availability_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_launch_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: bae3050f-9f10-42de-a116-e7075c839ccc
+		summarizeBy: none
+		sourceColumn: product_launch_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column launch_year
+		dataType: int64
+		formatString: 0
+		lineageTag: b5a11a93-4b23-4dea-bf38-b85319654bc6
+		summarizeBy: none
+		sourceColumn: launch_year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_product = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(RepoPath & "/dim_product.csv"), [Delimiter=",", Columns=14, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"product_sk", type text}, {"product_id", Int64.Type}, {"product_name", type text}, {"category", type text}, {"supplier", type text}, {"list_price_nok", type number}, {"standard_cost_nok", type number}, {"list_margin_nok", type number}, {"list_margin_pct", type number}, {"price_tier", type text}, {"is_available", type logical}, {"availability_status", type text}, {"product_launch_date", type date}, {"launch_year", Int64.Type}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+

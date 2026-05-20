@@ -1,0 +1,16 @@
+customer_sk,customer_id,first_name,last_name,full_name,email,region,customer_since_date,acquisition_month,acquisition_cohort,acquisition_year,is_active,customer_status,tenure_segment
+c4ca4238a0b923820dcc509a6f75849b,1,Erik,Hansen,Erik Hansen,erik.hansen@example.no,Oslo,2023-01-15,2023-01-01,2023-01,2023,true,Aktiv,Lojal
+c81e728d9d4c2f636f067f89cc14862c,2,Maria,Johansen,Maria Johansen,maria.johansen@example.no,Bergen,2023-02-20,2023-02-01,2023-02,2023,true,Aktiv,Lojal
+eccbc87e4b5ce2fe28308fd9f2a7baf3,3,Lars,Olsen,Lars Olsen,lars.olsen@example.no,Trondheim,2023-03-10,2023-03-01,2023-03,2023,true,Aktiv,Lojal
+a87ff679a2f3e71d9181a67b7542122c,4,Anna,Larsen,Anna Larsen,anna.larsen@example.no,Stavanger,2023-04-05,2023-04-01,2023-04,2023,true,Aktiv,Lojal
+e4da3b7fbbce2345d7772b0674a318d5,5,Thomas,Andersen,Thomas Andersen,thomas.andersen@example.no,Oslo,2023-05-12,2023-05-01,2023-05,2023,true,Aktiv,Lojal
+1679091c5a880faf6fb5e6087eb1b2dc,6,Kristin,Nilsen,Kristin Nilsen,kristin.nilsen@example.no,Tromsø,2023-06-18,2023-06-01,2023-06,2023,false,Inaktiv,Lojal
+8f14e45fceea167a5a36dedd4bea2543,7,Anders,Pedersen,Anders Pedersen,anders.pedersen@example.no,Bergen,2023-07-22,2023-07-01,2023-07,2023,true,Aktiv,Lojal
+c9f0f895fb98ab9159f51fd0297e236d,8,Ingrid,Kristiansen,Ingrid Kristiansen,ingrid.kristiansen@example.no,Oslo,2023-08-30,2023-08-01,2023-08,2023,true,Aktiv,Lojal
+45c48cce2e2d7fbdea1afc51c7c6ad26,9,Jonas,Berg,Jonas Berg,jonas.berg@example.no,Trondheim,2023-09-14,2023-09-01,2023-09,2023,true,Aktiv,Lojal
+d3d9446802a44259755d38e6d163e820,10,Hanna,Haugen,Hanna Haugen,hanna.haugen@example.no,Stavanger,2023-10-03,2023-10-01,2023-10,2023,false,Inaktiv,Lojal
+6512bd43d9caa6e02c990b0a82652dca,11,Ola,Strand,Ola Strand,ola.strand@example.no,Oslo,2023-11-08,2023-11-01,2023-11,2023,true,Aktiv,Lojal
+c20ad4d76fe97759aa27a0c99bff6710,12,Sofie,Lie,Sofie Lie,sofie.lie@example.no,Bergen,2024-01-10,2024-01-01,2024-01,2024,true,Aktiv,Lojal
+c51ce410c124a10e0db5e4b97fc2af39,13,Martin,Dahl,Martin Dahl,martin.dahl@example.no,Tromsø,2024-02-14,2024-02-01,2024-02,2024,true,Aktiv,Lojal
+aab3238922bcc25a6f606eb525ffdc56,14,Emilie,Bakken,Emilie Bakken,emilie.bakken@example.no,Trondheim,2024-03-20,2024-03-01,2024-03,2024,true,Aktiv,Lojal
+9bf31c7ff062936a96d3c8bd1f8f2ff3,15,Henrik,Moen,Henrik Moen,henrik.moen@example.no,Oslo,2024-04-25,2024-04-01,2024-04,2024,true,Aktiv,Lojal

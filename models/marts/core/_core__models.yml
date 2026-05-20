@@ -1,0 +1,189 @@
+version: 2
+
+models:
+
+  # ─────────────────────────────────────────── DIMENSIONS
+
+  - name: dim_customer
+    description: |
+      Konformert kundedimensjon. En rad per kunde, gjeldende snapshot.
+      Brukes som dimensjon mot alle fact-tabeller via `customer_sk`.
+    columns:
+      - name: customer_sk
+        description: Surrogatnøkkel (md5 av customer_id). Brukes som primærnøkkel.
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Naturlig forretningsnøkkel fra kildesystemet.
+        data_tests:
+          - unique
+          - not_null
+      - name: full_name
+        description: Fornavn + etternavn, sammensatt.
+      - name: email
+        description: Kundens e-postadresse.
+      - name: region
+        description: Norsk region/by (Oslo, Bergen, Trondheim, Stavanger, Tromsø).
+      - name: customer_since_date
+        description: Dato kunden ble registrert (created_at fra kilde).
+      - name: acquisition_cohort
+        description: ÅÅÅÅ-MM-streng for når kunden ble registrert. Brukes for kohortanalyse.
+      - name: tenure_segment
+        description: 'Beregnet segment: Ny kunde (<180d), Etablert (<365d), Lojal (>=365d).'
+      - name: is_active
+        description: Boolean — om kunden er aktiv.
+      - name: customer_status
+        description: Norsk visningsetikett for is_active (Aktiv/Inaktiv).
+
+  - name: dim_product
+    description: |
+      Konformert produktdimensjon. En rad per produkt.
+      Inneholder pris, kostnad og avledet margin/pris-segment.
+    columns:
+      - name: product_sk
+        description: Surrogatnøkkel (md5 av product_id).
+        data_tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: Naturlig forretningsnøkkel fra kildesystemet.
+        data_tests:
+          - unique
+          - not_null
+      - name: product_name
+        description: Produktnavn.
+      - name: category
+        description: Produktkategori (Kaffe, Te, Snacks, ...).
+      - name: supplier
+        description: Leverandørnavn.
+      - name: list_price_nok
+        description: Listepris i NOK.
+      - name: standard_cost_nok
+        description: Standard innkjøpskost i NOK.
+      - name: list_margin_pct
+        description: '(pris - kost) / pris. NULL hvis pris = 0.'
+      - name: price_tier
+        description: 'Lav (<50), Middels (<80), Premium (>=80).'
+      - name: is_available
+        description: Boolean — om produktet er aktivt i sortimentet.
+
+  - name: dim_date
+    description: |
+      Konformert datodimensjon. En rad per dag.
+      Dekker 2023-01-01 til 2025-12-31. `date_key` er INTEGER YYYYMMDD og
+      brukes som primærnøkkel mot fact-tabellenes order_date_key.
+    columns:
+      - name: date_key
+        description: INTEGER YYYYMMDD — primærnøkkel.
+        data_tests:
+          - unique
+          - not_null
+      - name: date
+        description: Den faktiske datoen.
+        data_tests:
+          - unique
+          - not_null
+      - name: year
+      - name: quarter_no
+      - name: quarter_label
+      - name: month_no
+      - name: month_name
+      - name: year_month
+      - name: iso_week
+      - name: day_name
+      - name: is_weekend
+      - name: is_current_month
+      - name: is_current_year
+
+  # ─────────────────────────────────────────── FACTS
+
+  - name: fct_orders
+    description: |
+      Order-header fact. En rad per ordre. Brukes til ordretelling, AOV,
+      statusmiks og kundefrekvens. line_revenue_nok beregnes fra order_items.
+    columns:
+      - name: order_id
+        description: Naturlig nøkkel.
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_sk
+        description: Fremmednøkkel til dim_customer.
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+      - name: order_date_key
+        description: Fremmednøkkel til dim_date.
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_key
+      - name: order_status
+        description: 'completed / pending / returned.'
+      - name: order_total_nok
+        description: Headerbeløp fra kilde.
+      - name: line_revenue_nok
+        description: Sum av line_total_nok over ordrelinjene.
+      - name: line_cost_nok
+        description: Sum av (quantity * standard_cost) over ordrelinjene.
+      - name: line_profit_nok
+        description: line_revenue_nok - line_cost_nok.
+      - name: line_quantity
+        description: Sum av kvantum over ordrelinjene.
+      - name: line_count
+        description: Antall ordrelinjer i ordren.
+
+  - name: fct_order_items
+    description: |
+      Transaksjonsfaktum på laveste grain — en rad per ordrelinje.
+      Drivkraften bak alle revenue / profit / quantity / produkt-analyser.
+    columns:
+      - name: order_item_id
+        description: Naturlig nøkkel.
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: 'Fremmednøkkel til fct_orders (henvisning, ikke en formell relasjon her).'
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('fct_orders')
+              field: order_id
+      - name: customer_sk
+        description: Fremmednøkkel til dim_customer.
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+      - name: product_sk
+        description: Fremmednøkkel til dim_product.
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_sk
+      - name: order_date_key
+        description: Fremmednøkkel til dim_date.
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_key
+      - name: quantity
+        description: Antall enheter.
+      - name: unit_price_nok
+        description: Pris per enhet på ordretidspunktet.
+      - name: line_revenue_nok
+        description: quantity * unit_price.
+      - name: line_cost_nok
+        description: quantity * standard_cost.
+      - name: line_profit_nok
+        description: line_revenue_nok - line_cost_nok.
+      - name: line_margin_pct
+        description: line_profit_nok / line_revenue_nok.

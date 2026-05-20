@@ -1,0 +1,84 @@
+{
+  "name": "GriteraAnalytics",
+  "dataColors": [
+    "#1F8FA3",
+    "#E0A458",
+    "#0B2A4A",
+    "#7AB6BF",
+    "#D77E5D",
+    "#7C9EB2",
+    "#9CCAD0",
+    "#C5A052",
+    "#4F6D8A",
+    "#A8B5C0"
+  ],
+  "background": "#F5F7FA",
+  "foreground": "#0B2A4A",
+  "tableAccent": "#1F8FA3",
+  "good": "#4FB286",
+  "neutral": "#E0A458",
+  "bad": "#D9534F",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#0B2A4A"
+              }
+            },
+            "fontSize": 14,
+            "fontFamily": "Segoe UI Semibold"
+          }
+        ],
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E5E9EF"
+              }
+            },
+            "radius": 4
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [
+          {
+            "color": {
+              "solid": {
+                "color": "#0B2A4A"
+              }
+            },
+            "fontSize": 32,
+            "fontFamily": "Segoe UI Semibold"
+          }
+        ],
+        "categoryLabels": [
+          {
+            "color": {
+              "solid": {
+                "color": "#5B6770"
+              }
+            },
+            "fontSize": 11
+          }
+        ]
+      }
+    }
+  }
+}

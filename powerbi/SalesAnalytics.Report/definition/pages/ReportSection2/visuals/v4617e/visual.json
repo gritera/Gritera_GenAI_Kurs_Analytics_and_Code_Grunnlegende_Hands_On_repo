@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "v4617e",
+  "position": {
+    "x": 64,
+    "y": 430,
+    "z": 422,
+    "height": 52,
+    "width": 560,
+    "tabOrder": 422
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "18 av 20 fullført, 1 returnert (90 NOK), 1 pending (155 NOK). Returandelen er meget lav — kvalitetssignal.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "10pt",
+                      "fontWeight": "normal",
+                      "color": "#5B6770"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

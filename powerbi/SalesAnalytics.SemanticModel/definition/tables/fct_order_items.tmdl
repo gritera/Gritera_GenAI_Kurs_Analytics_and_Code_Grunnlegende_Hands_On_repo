@@ -1,0 +1,359 @@
+table fct_order_items
+	lineageTag: 5d2d38cf-4e80-4cfa-b06c-a73ec904cb2b
+
+	measure 'Antall ordrelinjer' = COUNTROWS('fct_order_items')
+		formatString: #,##0
+		displayFolder: 1 · Volum
+		lineageTag: e4545d7c-764a-419f-8e31-6cf0b6888d76
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Antall ordrer' = DISTINCTCOUNT('fct_order_items'[order_id])
+		formatString: #,##0
+		displayFolder: 1 · Volum
+		lineageTag: d63ad372-0ed9-4710-b392-bf7bc7e5a9a6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Antall kunder' = DISTINCTCOUNT('fct_order_items'[customer_id])
+		formatString: #,##0
+		displayFolder: 1 · Volum
+		lineageTag: 963fff5b-dd0d-4868-bd90-62f4d2b152ba
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Antall produkter solgt' = DISTINCTCOUNT('fct_order_items'[product_id])
+		formatString: #,##0
+		displayFolder: 1 · Volum
+		lineageTag: 9a2c5a2f-320f-4603-ad0c-0604d564c164
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Antall enheter' = SUM('fct_order_items'[quantity])
+		formatString: #,##0
+		displayFolder: 1 · Volum
+		lineageTag: 7c274b2b-bf7e-41c7-b205-d96646c60800
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total omsetning' = CALCULATE(SUM('fct_order_items'[line_revenue_nok]), 'fct_order_items'[order_status] = "completed")
+		formatString: #,##0 "kr"
+		displayFolder: 2 · Omsetning
+		lineageTag: aa66e0e4-e4d6-4ed6-8fbe-3d3a884b98d8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total kostnad' = CALCULATE(SUM('fct_order_items'[line_cost_nok]), 'fct_order_items'[order_status] = "completed")
+		formatString: #,##0 "kr"
+		displayFolder: 2 · Omsetning
+		lineageTag: c6ec65d9-3889-499e-ab32-60aa75d6f1d6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total fortjeneste' = [Total omsetning] - [Total kostnad]
+		formatString: #,##0 "kr"
+		displayFolder: 2 · Omsetning
+		lineageTag: eefd2730-3c0d-4741-8982-9a06822ef457
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Bruttomargin %' = DIVIDE([Total fortjeneste], [Total omsetning], 0)
+		formatString: 0.0%
+		displayFolder: 2 · Omsetning
+		lineageTag: 1d91497f-0e90-447f-9c1b-ffd34235fb39
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Returnert omsetning' = CALCULATE(SUM('fct_order_items'[line_revenue_nok]), 'fct_order_items'[order_status] = "returned")
+		formatString: #,##0 "kr"
+		displayFolder: 2 · Omsetning
+		lineageTag: 713711f9-528d-4b01-aad2-112788bb8bc8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Returandel %' = DIVIDE([Returnert omsetning], [Total omsetning] + [Returnert omsetning], 0)
+		formatString: 0.0%
+		displayFolder: 2 · Omsetning
+		lineageTag: 783d247a-cb35-4656-bcfb-4d32d7344af1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Snitt ordreverdi (AOV)' = DIVIDE([Total omsetning], [Antall ordrer], 0)
+		formatString: #,##0 "kr"
+		displayFolder: 3 · Kunde
+		lineageTag: de215a9d-b0bb-4a75-986d-11e46dfa60ed
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ordrer per kunde' = DIVIDE([Antall ordrer], [Antall kunder], 0)
+		formatString: #,##0.0
+		displayFolder: 3 · Kunde
+		lineageTag: 78328a94-a4c7-4a30-8175-08187404e58d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Customer Lifetime Value' = DIVIDE([Total omsetning], [Antall kunder], 0)
+		formatString: #,##0 "kr"
+		displayFolder: 3 · Kunde
+		lineageTag: 8117fda9-62e0-44db-bd8b-0344baa015b6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Linjer per ordre' = DIVIDE([Antall ordrelinjer], [Antall ordrer], 0)
+		formatString: #,##0.0
+		displayFolder: 3 · Kunde
+		lineageTag: 9e3ad99d-c2f0-4a64-a286-bc0f9041fc62
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Snittpris per enhet' = DIVIDE([Total omsetning], [Antall enheter], 0)
+		formatString: #,##0.00 "kr"
+		displayFolder: 4 · Produkt
+		lineageTag: db844446-516d-49e6-859c-bdbbcd2da346
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Fortjeneste per enhet' = DIVIDE([Total fortjeneste], [Antall enheter], 0)
+		formatString: #,##0.00 "kr"
+		displayFolder: 4 · Produkt
+		lineageTag: ba2f09fc-ac6a-4b2d-90d0-ad7a381634f1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Andel av omsetning' = DIVIDE([Total omsetning], CALCULATE([Total omsetning], ALL('dim_product')), 0)
+		formatString: 0.0%
+		displayFolder: 4 · Produkt
+		lineageTag: 9872cd6e-d099-4ecb-a83d-d11313400304
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Omsetning hittil i år (YTD)' = TOTALYTD([Total omsetning], 'dim_date'[date])
+		formatString: #,##0 "kr"
+		displayFolder: 5 · Tidsintelligens
+		lineageTag: 7b04fc9a-557f-4390-a9a1-cfa7361837b9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Omsetning hittil i mnd (MTD)' = TOTALMTD([Total omsetning], 'dim_date'[date])
+		formatString: #,##0 "kr"
+		displayFolder: 5 · Tidsintelligens
+		lineageTag: bf8493bd-d9f5-47ff-b3fa-dc7d997d1516
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Omsetning forrige år' = CALCULATE([Total omsetning], SAMEPERIODLASTYEAR('dim_date'[date]))
+		formatString: #,##0 "kr"
+		displayFolder: 5 · Tidsintelligens
+		lineageTag: b8021097-d427-43b2-8e2f-d797c6d65873
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Omsetning forrige måned' = CALCULATE([Total omsetning], DATEADD('dim_date'[date], -1, MONTH))
+		formatString: #,##0 "kr"
+		displayFolder: 5 · Tidsintelligens
+		lineageTag: 90443ef5-5d57-47e6-b305-c36a102561ae
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Vekst MoM %' = DIVIDE([Total omsetning] - [Omsetning forrige måned], [Omsetning forrige måned], 0)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 5 · Tidsintelligens
+		lineageTag: f1c2c291-3477-4a24-a781-47e47b21f40d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Vekst YoY %' = DIVIDE([Total omsetning] - [Omsetning forrige år], [Omsetning forrige år], 0)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 5 · Tidsintelligens
+		lineageTag: 3f0c6821-0c3c-45d3-9952-9b5e1c65c96e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Rullerende 3 mnd omsetning' = CALCULATE([Total omsetning], DATESINPERIOD('dim_date'[date], LASTDATE('dim_date'[date]), -3, MONTH))
+		formatString: #,##0 "kr"
+		displayFolder: 5 · Tidsintelligens
+		lineageTag: 5d06f3b5-4a5f-4adf-b75f-e703f682a846
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Topp-kunde omsetning' = MAXX(VALUES('dim_customer'[full_name]), [Total omsetning])
+		formatString: #,##0 "kr"
+		displayFolder: 6 · Rangering
+		lineageTag: 5601d667-1cb2-4d15-a7b5-9d55336ccc93
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Rangering kunde (oms)' = RANKX(ALL('dim_customer'[full_name]), [Total omsetning], , DESC, DENSE)
+		formatString: 0
+		displayFolder: 6 · Rangering
+		lineageTag: 97a2f8ba-3137-47a6-9264-135848ede4e3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Rangering produkt (oms)' = RANKX(ALL('dim_product'[product_name]), [Total omsetning], , DESC, DENSE)
+		formatString: 0
+		displayFolder: 6 · Rangering
+		lineageTag: 4937614d-eb5f-4099-88e5-36b4bf417fcd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column order_item_id
+		dataType: int64
+		formatString: 0
+		lineageTag: da5689ed-fde3-4308-b8c1-ee5966f44a22
+		summarizeBy: none
+		sourceColumn: order_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: bcf24e07-e1c3-40db-8ba0-c40ffcd349ad
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_sk
+		dataType: string
+		isHidden
+		lineageTag: fa300450-9efb-4cdb-95e3-42b36eb33f16
+		summarizeBy: none
+		sourceColumn: customer_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0a0068c4-d019-4353-8ae3-5199c3ef6f42
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_sk
+		dataType: string
+		isHidden
+		lineageTag: 10a62f35-6c34-472f-a8e2-83582e9c6c1d
+		summarizeBy: none
+		sourceColumn: product_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 05450ce7-1dd7-4904-be25-6f461af6dd32
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6676134e-c57b-4014-8aa2-9013ff2684ef
+		summarizeBy: none
+		sourceColumn: order_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 414f8a82-f969-413a-9ca8-82f400224869
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column order_status
+		dataType: string
+		isHidden
+		lineageTag: 5fa4c507-a696-4f5b-8d2a-fd8ed4852a2d
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_completed
+		dataType: boolean
+		lineageTag: cc859c82-fae1-4ef6-b6d2-527d2a9aa2bc
+		summarizeBy: none
+		sourceColumn: is_completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: #,##0
+		lineageTag: b6a6c227-5c95-4e94-a4d0-11603966752c
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price_nok
+		dataType: double
+		formatString: #,##0.00 "kr"
+		lineageTag: 0847592f-6fb4-4089-8d6d-6175d6690185
+		summarizeBy: sum
+		sourceColumn: unit_price_nok
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_revenue_nok
+		dataType: double
+		formatString: #,##0.00 "kr"
+		lineageTag: 5599ff13-0adc-4486-ad80-aae41a2dd1fa
+		summarizeBy: sum
+		sourceColumn: line_revenue_nok
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_cost_nok
+		dataType: double
+		formatString: #,##0.00 "kr"
+		lineageTag: d0e9774e-90da-478b-aa81-f31f1620733d
+		summarizeBy: sum
+		sourceColumn: line_cost_nok
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_profit_nok
+		dataType: double
+		formatString: #,##0.00 "kr"
+		lineageTag: 89e47abf-5da4-4a82-b78c-b9c3dee9262b
+		summarizeBy: sum
+		sourceColumn: line_profit_nok
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_margin_pct
+		dataType: double
+		formatString: 0.0%
+		lineageTag: d9d2ca0b-979b-4766-a69d-5d931899a233
+		summarizeBy: average
+		sourceColumn: line_margin_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_order_items = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(RepoPath & "/fct_order_items.csv"), [Delimiter=",", Columns=16, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"order_item_id", Int64.Type}, {"order_id", Int64.Type}, {"customer_sk", type text}, {"customer_id", Int64.Type}, {"product_sk", type text}, {"product_id", Int64.Type}, {"order_date_key", Int64.Type}, {"order_date", type date}, {"order_status", type text}, {"is_completed", type logical}, {"quantity", Int64.Type}, {"unit_price_nok", type number}, {"line_revenue_nok", type number}, {"line_cost_nok", type number}, {"line_profit_nok", type number}, {"line_margin_pct", type number}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+

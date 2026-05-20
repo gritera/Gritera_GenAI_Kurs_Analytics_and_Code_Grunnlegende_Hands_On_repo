@@ -1,0 +1,139 @@
+table dim_customer
+	lineageTag: e766ac0c-d396-4db8-90ff-33922df1b3ad
+
+	column customer_sk
+		dataType: string
+		isHidden
+		lineageTag: ed88e4cb-0a15-4e90-8b1c-d082cdcca77e
+		summarizeBy: none
+		sourceColumn: customer_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 932e17c5-62ef-476b-aa9d-d47e44f34c4e
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		isHidden
+		lineageTag: 5067b987-0467-43e3-8e49-159bd0c33d8a
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		isHidden
+		lineageTag: 75562713-d71a-47fc-afc4-ffacb2cce43f
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_name
+		dataType: string
+		lineageTag: 809d581d-1a04-429a-9498-5188dce16459
+		summarizeBy: none
+		sourceColumn: full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 0db90240-7c46-4e10-923c-af9e9dc72433
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 713f6ef4-877e-4f1e-8ac2-85a278f6efaa
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_since_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 82e2543c-5fe9-4787-8f47-12a8e40f0e0e
+		summarizeBy: none
+		sourceColumn: customer_since_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column acquisition_month
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: da9df55d-4f10-46b9-acad-09a317a46eb3
+		summarizeBy: none
+		sourceColumn: acquisition_month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column acquisition_cohort
+		dataType: string
+		lineageTag: 2decb594-5537-416b-a25f-0ba64f22fde9
+		summarizeBy: none
+		sourceColumn: acquisition_cohort
+
+		annotation SummarizationSetBy = Automatic
+
+	column acquisition_year
+		dataType: int64
+		formatString: 0
+		lineageTag: d5bec9fb-7615-44d3-9548-58bc09c423a9
+		summarizeBy: none
+		sourceColumn: acquisition_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		lineageTag: 65a39781-cd38-45ca-8087-16f22ccfa3c9
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_status
+		dataType: string
+		lineageTag: d1b731d0-e69c-4494-a10a-9a2e2e52b4a1
+		summarizeBy: none
+		sourceColumn: customer_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column tenure_segment
+		dataType: string
+		lineageTag: 81aa591e-eeba-43e5-a6a3-11757774b948
+		summarizeBy: none
+		sourceColumn: tenure_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_customer = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(RepoPath & "/dim_customer.csv"), [Delimiter=",", Columns=14, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"customer_sk", type text}, {"customer_id", Int64.Type}, {"first_name", type text}, {"last_name", type text}, {"full_name", type text}, {"email", type text}, {"region", type text}, {"customer_since_date", type date}, {"acquisition_month", type date}, {"acquisition_cohort", type text}, {"acquisition_year", Int64.Type}, {"is_active", type logical}, {"customer_status", type text}, {"tenure_segment", type text}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+

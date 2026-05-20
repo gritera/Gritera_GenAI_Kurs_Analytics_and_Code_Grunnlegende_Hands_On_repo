@@ -1,0 +1,24 @@
+model Model
+	culture: nb-NO
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: nb-NO
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dim_customer","dim_product","dim_date","fct_orders","fct_order_items","RepoPath"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation TabularEditor_SerializeOptions = {"IgnoreInferredObjects": true, "IgnoreInferredProperties": true, "IgnoreTimestamps": true, "SplitMultilineStrings": true, "PrefixFilenames": false, "LocalTranslations": false, "LocalPerspectives": false, "LocalRelationships": false, "Levels": ["Data Sources", "Shared Expressions", "Perspectives", "Translations", "Relationships", "Roles", "Tables/Columns", "Tables/Hierarchies", "Tables/Measures", "Tables/Partitions", "Tables/Calculation Items"]}
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_customer
+ref table dim_product
+ref table dim_date
+ref table fct_orders
+ref table fct_order_items
+
+ref cultureInfo nb-NO
+

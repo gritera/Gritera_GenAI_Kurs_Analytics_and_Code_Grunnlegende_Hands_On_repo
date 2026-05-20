@@ -1,0 +1,170 @@
+table fct_orders
+	lineageTag: 992e74c8-f7a3-4a31-9a83-7273fbc41cfa
+
+	measure 'Antall ordrer (header)' = DISTINCTCOUNT('fct_orders'[order_id])
+		formatString: #,##0
+		displayFolder: Header
+		lineageTag: f80e4d09-62b6-40cd-89f3-27e8216c2a83
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Andel fullførte ordrer' =
+			DIVIDE(
+			    CALCULATE([Antall ordrer (header)], 'fct_orders'[order_status] = "completed"),
+			    [Antall ordrer (header)],
+			    0
+			)
+		formatString: 0.0%
+		displayFolder: Header
+		lineageTag: 93a0e468-25af-45a4-bea6-9567337d7380
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2997f2e7-226a-469b-92b7-cfcd2bdae981
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_sk
+		dataType: string
+		isHidden
+		lineageTag: 34995273-b224-49a6-b48f-cb5b1eb63192
+		summarizeBy: none
+		sourceColumn: customer_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: da104467-b811-4261-a056-e591c1360ca4
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a0339769-2054-4d20-8d9f-c7ea5b354743
+		summarizeBy: none
+		sourceColumn: order_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: d4d8e45a-cf11-4062-ab79-9728edbc9e60
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column order_status
+		dataType: string
+		isHidden
+		lineageTag: 347838ad-3c00-4e86-b0bd-1d59f16ffc0d
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status_no
+		dataType: string
+		lineageTag: 79496445-c42f-4ac9-be62-4ae9a19cb773
+		summarizeBy: none
+		sourceColumn: order_status_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_completed
+		dataType: boolean
+		lineageTag: 3d5474bf-6137-4ac3-80e4-0a50a785e46b
+		summarizeBy: none
+		sourceColumn: is_completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_returned
+		dataType: boolean
+		lineageTag: 43ebb52b-99bf-4755-99ed-74851f563d71
+		summarizeBy: none
+		sourceColumn: is_returned
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_total_nok
+		dataType: double
+		formatString: #,##0.00 "kr"
+		lineageTag: ba98784e-5c4b-41d4-b16b-c904015949b6
+		summarizeBy: sum
+		sourceColumn: order_total_nok
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_revenue_nok
+		dataType: double
+		formatString: #,##0.00 "kr"
+		lineageTag: 1eb899e1-1b54-472b-b756-6b07df0a90c0
+		summarizeBy: sum
+		sourceColumn: line_revenue_nok
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_cost_nok
+		dataType: double
+		formatString: #,##0.00 "kr"
+		lineageTag: 69327054-84f3-410e-ab65-4e5430136962
+		summarizeBy: sum
+		sourceColumn: line_cost_nok
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_profit_nok
+		dataType: double
+		formatString: #,##0.00 "kr"
+		lineageTag: 085e3004-23b0-4c9b-8eef-000f14c455a0
+		summarizeBy: sum
+		sourceColumn: line_profit_nok
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_quantity
+		dataType: int64
+		formatString: #,##0
+		lineageTag: a8af94d4-6ade-4f53-8794-eaff69039622
+		summarizeBy: sum
+		sourceColumn: line_quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_count
+		dataType: int64
+		formatString: #,##0
+		lineageTag: 4fa2b70e-d7b9-443b-bf3a-2265f1aaf587
+		summarizeBy: sum
+		sourceColumn: line_count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_orders = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(RepoPath & "/fct_orders.csv"), [Delimiter=",", Columns=15, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"order_id", Int64.Type}, {"customer_sk", type text}, {"customer_id", Int64.Type}, {"order_date_key", Int64.Type}, {"order_date", type date}, {"order_status", type text}, {"order_status_no", type text}, {"is_completed", type logical}, {"is_returned", type logical}, {"order_total_nok", type number}, {"line_revenue_nok", type number}, {"line_cost_nok", type number}, {"line_profit_nok", type number}, {"line_quantity", Int64.Type}, {"line_count", Int64.Type}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+

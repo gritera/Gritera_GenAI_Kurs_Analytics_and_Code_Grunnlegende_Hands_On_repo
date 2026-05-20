@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "v85e3e",
+  "position": {
+    "x": 684,
+    "y": 430,
+    "z": 422,
+    "height": 52,
+    "width": 560,
+    "tabOrder": 422
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Gjennomsnittlig 1,4 ordrer per kunde. Rom for å øke kjøpsfrekvens gjennom gjenkjøpskampanjer.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "10pt",
+                      "fontWeight": "normal",
+                      "color": "#5B6770"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

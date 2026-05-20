@@ -1,0 +1,20 @@
+relationship bdd8077e-aca2-eea3-d72c-0d33df880d96
+	fromColumn: fct_order_items.customer_sk
+	toColumn: dim_customer.customer_sk
+
+relationship edffa289-e7ad-26a0-6262-e231b3b2364c
+	fromColumn: fct_order_items.product_sk
+	toColumn: dim_product.product_sk
+
+relationship ecd8a9fe-81ea-55dc-76bf-b5adf12ec0a4
+	fromColumn: fct_order_items.order_date_key
+	toColumn: dim_date.date_key
+
+relationship 62494ee7-9c84-01d7-2198-d2ff6faa2ca3
+	fromColumn: fct_orders.customer_sk
+	toColumn: dim_customer.customer_sk
+
+relationship 0070780f-68b7-257e-990e-683b6853dcee
+	fromColumn: fct_orders.order_date_key
+	toColumn: dim_date.date_key
+
